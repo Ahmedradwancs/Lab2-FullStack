@@ -2,7 +2,6 @@
 // import Project from "../models/Project.js";
 import ProjectAssignment from "../models/ProjectAssignment.js";
 import mongoose from "mongoose";
-
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -32,23 +31,21 @@ export const getAllData = async () => {
                     from: "Employee",
                     localField: "employee_id",
                     foreignField: "_id",
-                    as: "employee",
-                },
+                    as: "employee"
+                }
             },
             {
                 $lookup: {
                     from: "Project",
                     localField: "project_code",
                     foreignField: "project_code",
-                    as: "project",
+                    as: "project"
                 }
             }
             
         ])
-
         return aggregate;
     } catch (error) {
         console.error("Error fetching data:", error);
-        throw new Error("Error fetching data");
     }
-} 
+};
