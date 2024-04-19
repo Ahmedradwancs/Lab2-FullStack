@@ -1,11 +1,17 @@
 import express from 'express';
 import apiRouter from './routes/api.js';
 import dotenv from 'dotenv';
+import Cors from 'cors';
 
 dotenv.config();
 
+
+
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Enable CORS
+app.use(Cors());
 
 // Middleware
 app.use(express.json());
