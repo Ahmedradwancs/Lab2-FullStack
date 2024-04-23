@@ -1,5 +1,3 @@
-// import Employee from "../models/Employee.js";
-// import Project from "../models/Project.js";
 import ProjectAssignment from "../models/ProjectAssignment.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -17,7 +15,7 @@ export const connectDB = async () => {
         console.log("Connected to MongoDB");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error.message);
-        process.exit(1); // Exit the process with an error
+        //process.exit(1);
     }
     };
 
