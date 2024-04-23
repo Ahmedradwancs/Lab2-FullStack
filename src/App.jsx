@@ -10,9 +10,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={reactLogo} className="App-logo" alt="logo" />
-        <img src={viteLogo} className="App-logo" alt="logo" />
-        <h1>Welcome to Vite + React</h1>
+        {/* <img src={reactLogo} className="App-logo" alt="logo" />
+        <img src={viteLogo} className="App-logo" alt="logo" /> */}
+        {/* <h1>Welcome to Vite + React</h1> */}
         <button onClick={() => setShowTable(!showTable)}>
           {showTable ? 'Hide Table' : 'Show Table'}
         </button>
