@@ -32,32 +32,36 @@ const Table = () => {
 
     console.log('Data:', data); // Log data state
 
-    // const sortBy = (field) => {
-    //     const sortedData = [...data].sort((a, b) => {
-    //         if (a[field] < b[field]) return -1;
-    //         if (a[field] > b[field]) return 1;
-    //         return 0;
-    //     });
-    //     setData(sortedData);
-    // };
 
-    const sortBy = (field) => {
-        const sortedData = [...data].sort((a, b) => {
-            const valueA = getFieldNestedValue(a, field);
-            const valueB = getFieldNestedValue(b, field);
-            
-            if (valueA < valueB) return -1;
-            if (valueA > valueB) return 1;
-            return 0;
+
+    const sortByEmployeeID = () => {
+        const sorted = [...data].sort((a, b) => {
+            return a.employee[0]._id.localeCompare(b.employee[0]._id);
         });
-        setData(sortedData);
+        setData(sorted);
     };
     
-    const getFieldNestedValue = (obj, path) => {
-        const keys = path.split('.');
-        return keys.reduce((acc, key) => acc && acc[key], obj);
+    const sortByEmployeeName = () => {
+        const sorted = [...data].sort((a, b) => {
+            return a.employee[0].full_name.localeCompare(b.employee[0].full_name);
+        });
+        setData(sorted);
     };
-    
+
+    const sortByProjectName = () => {
+        const sorted = [...data].sort((a, b) => {
+            return a.project[0].project_name.localeCompare(b.project[0].project_name);
+        });
+        setData(sorted);
+    };
+
+    const sortByDate = () => {
+        const sorted = [...data].sort((a, b) => {
+            return new Date(a.start_date) - new Date(b.start_date);
+        });
+        setData(sorted);
+    };
+
 
     return (
         <div>
@@ -65,10 +69,10 @@ const Table = () => {
             <table>
                 <thead>
                     <tr>
-                        <th onClick={() => sortBy('employee_id')}>Employee ID</th>
-                        <th onClick={() => sortBy('employee[0].full_name')}>Employee Name</th>
-                        <th onClick={() => sortBy('project[0].project_name')}>Project Name</th>
-                        <th onClick={() => sortBy('start_date')}>Start Date</th>
+                        <th onClick={() => sortByEmployeeID('employee_id')}>Employee ID</th>
+                        <th onClick={() => sortByEmployeeName('employee[0].full_name')}>Employee Name</th>
+                        <th onClick={() => sortByProjectName('project[0].project_name')}>Project Name</th>
+                        <th onClick={() => sortByDate('start_date')}>Start Date</th>
                     </tr>
                 </thead>
                 <tbody>

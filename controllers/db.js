@@ -1,4 +1,6 @@
 import ProjectAssignment from "../models/ProjectAssignment.js";
+import Employee from "../models/Employee.js";
+import Project from "../models/Project.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
@@ -47,3 +49,37 @@ export const getAllData = async () => {
         console.error("Error fetching data:", error);
     }
 };
+
+//function to create a new project assignment
+export const createProjectAssignment = async (req, res) => {
+    try {
+        const data = await ProjectAssignment.create(req.body);
+        res.json(data);
+    } catch (error) {
+        console.error("Error creating project assignment:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+//function to create a new employee
+export const createEmployee = async (req, res) => {
+    try {
+        const data = await Employee.create(req.body);
+        res.json(data);
+    } catch (error) {
+        console.error("Error creating employee:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+//function to create a new project
+export const createProject = async (req, res) => {
+    try {
+        const data = await Project.create(req.body);
+        res.json(data);
+    } catch (error) {
+        console.error("Error creating project:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
