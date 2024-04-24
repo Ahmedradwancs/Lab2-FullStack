@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import './Table.css';
 // Function to fetch data from the backend server
 const fetchData = async () => {
     try {
