@@ -51,7 +51,6 @@ export const getAllData = async () => {
 };
 
 
-
 // Function to create a new employee with validation
 export const createEmployee = async (employeeData) => {
     try {
@@ -63,7 +62,7 @@ export const createEmployee = async (employeeData) => {
         const newEmployee = await Employee.create(employeeData);
         return newEmployee;
     } catch (error) {
-        throw new Error('Failed to add the new employee'); // Rethrow the error for handling in the caller
+        throw new Error('Failed to add the new employee', error); // Rethrow the error for handling in the caller
     }
 };
 
@@ -81,11 +80,12 @@ export const createProject = async (projectData) => {
         const newProject = await Project.create(projectData);
         return newProject;
     } catch (error) {
-        throw new Error('Failed to add the new project'); // Rethrow the error for handling in the caller
+        throw new Error('Failed to add the new project', rror); // Rethrow the error for handling in the caller
     }
 };
 
 // Controller function to create a project assignment
+// Function to create a project assignment
 export const createProjectAssignment = async (projectAssignmentData) => {
     try {
         // Check if the employee ID exists
@@ -93,15 +93,18 @@ export const createProjectAssignment = async (projectAssignmentData) => {
         if (!existingEmployee) {
             throw new Error('Employee ID does not exist');
         }
+        
+        // Check if the project code exists
         const existingProject = await Project.findOne({ project_code: projectAssignmentData.project_code });
         if (!existingProject) {
             throw new Error('Project code does not exist');
         }
+        
+        // Create the project assignment
         const newProjectAssignment = await ProjectAssignment.create(projectAssignmentData);
         return newProjectAssignment;
     } catch (error) {
-        throw new Error('Failed to add the project assignment'); // Rethrow the error for handling in the caller
+        throw error; // Rethrow the error for handling in the caller
     }
 };
-
 

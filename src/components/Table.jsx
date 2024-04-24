@@ -17,20 +17,28 @@ const fetchData = async () => {
 const Table = () => {
     const [data, setData] = useState([]);
 
+    // Function to fetch data and set state
+    const getData = async () => {
+        try {
+            const fetchedData = await fetchData();
+            setData(fetchedData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const fetchedData = await fetchData();
-                setData(fetchedData);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+        getData(); 
 
-        getData();
-    }, []); // Empty dependency array ensures the effect runs only once
+        const intervalId = setInterval(() => {
+            getData(); 
+        }, 60000); 
 
-    console.log('Data:', data); // Log data state
+        return () => clearInterval(intervalId);
+    }, []); 
+
+    console.log('Data:', data);
+
 
 
 

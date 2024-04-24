@@ -55,7 +55,14 @@ apiRouter.post('/project_assignments', async (req, res) => {
         const newProjectAssignment = await createProjectAssignment(req.body);
         res.status(201).json(newProjectAssignment);
     } catch (error) {
-        res.status(500).json({ error: error.message }); 
+        // Handle specific errors and send appropriate responses
+        if (error.message === 'Employee ID does not exist') {
+            res.status(400).json({ error: 'Employee ID does not exist' });
+        } else if (error.message === 'Project code does not exist') {
+            res.status(400).json({ error: 'Project code does not exist' });
+        } else {
+            res.status(500).json({ error: 'Failed to add the project assignment' });
+        }
     }
 });
 
