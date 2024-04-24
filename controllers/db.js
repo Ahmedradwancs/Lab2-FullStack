@@ -50,36 +50,66 @@ export const getAllData = async () => {
     }
 };
 
-//function to create a new project assignment
-export const createProjectAssignment = async (req, res) => {
-    try {
-        const data = await ProjectAssignment.create(req.body);
-        res.json(data);
-    } catch (error) {
-        console.error("Error creating project assignment:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-};
 
-//function to create a new employee
-export const createEmployee = async (req, res) => {
+
+// Function to create a new employee with validation
+export const createEmployee = async (employeeData) => {
     try {
-        const data = await Employee.create(req.body);
-        res.json(data);
+        // Check if the email is already in use
+        const existingEmployee = await Employee.findOne({ email: employeeData.email });
+        if (existingEmployee) {
+            throw new Error('Email is already in use');
+        }
+        
+        // Create the new employee
+        const newEmployee = await Employee.create(employeeData);
+        return newEmployee;
     } catch (error) {
         console.error("Error creating employee:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        throw error; // Rethrow the error for handling in the caller
     }
 };
 
-//function to create a new project
-export const createProject = async (req, res) => {
+// Controller function to create a project with validation
+export const createProject = async (projectData) => {
     try {
-        const data = await Project.create(req.body);
-        res.json(data);
+        // Check if the project code is already in use
+        const existingProject = await Project.findOne({ project_code: projectData.project_code });
+        if (existingProject) {
+            throw new Error('Project code is already in use');
+        }
+        
+        // Create the new project
+        const newProject = await Project.create(projectData);
+        return newProject;
     } catch (error) {
         console.error("Error creating project:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        throw error; // Rethrow the error for handling in the caller
     }
 };
+
+// Controller function to create a project assignment
+export const createProjectAssignment = async (projectAssignmentData) => {
+    try {
+        // Check if the employee ID exists
+        const existingEmployee = await Employee.findById(projectAssignmentData.employee_id);
+        if (!existingEmployee) {
+            throw new Error('Employee ID does not exist');
+        }
+        
+        // Check if the project code exists
+        const existingProject = await Project.findOne({ project_code: projectAssignmentData.project_code });
+        if (!existingProject) {
+            throw new Error('Project code does not exist');
+        }
+
+        // Create the project assignment
+        const newProjectAssignment = await ProjectAssignment.create(projectAssignmentData);
+        return newProjectAssignment;
+    } catch (error) {
+        console.error("Error creating project assignment:", error);
+        throw error; // Rethrow the error for handling in the caller
+    }
+};
+
 

@@ -27,36 +27,36 @@ apiRouter.get('/employees', async (req, res) => {
 
 apiRouter.post('/employees', async (req, res) => {
     try {
-        const data = await Employee.createEmployee(req.body);
-        res.json(data);
+        const newEmployee = await createEmployee(req.body);
+        res.json(newEmployee);
     } catch (error) {
         console.error('Error creating employee:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-}
-);
+});
 
+// Route handler for creating a new project
 apiRouter.post('/projects', async (req, res) => {
     try {
-        const data = await Project.createProject(req.body);
-        res.json(data);
+        const newProject = await createProject(req.body);
+        res.json(newProject);
     } catch (error) {
         console.error('Error creating project:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-}
-);
+});
 
+// Route handler for creating a new project assignment
 apiRouter.post('/project_assignments', async (req, res) => {
     try {
-        const data = await ProjectAssignment.createProjectAssignment(req.body);
-        res.json(data);
+        const newProjectAssignment = await createProjectAssignment(req.body);
+        res.status(201).json(newProjectAssignment);
     } catch (error) {
         console.error('Error creating project assignment:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Employee ID or Project code do not exists' });
     }
-}
-);
+});
+
 
 
 
