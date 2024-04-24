@@ -25,26 +25,29 @@ apiRouter.get('/employees', async (req, res) => {
     }
 });
 
+// Route handler for creating a new employee
 apiRouter.post('/employees', async (req, res) => {
     try {
         const newEmployee = await createEmployee(req.body);
-        res.json(newEmployee);
+        res.status(201).json(newEmployee); 
     } catch (error) {
-        console.error('Error creating employee:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        if (error.message === 'Email is already in use') {
+            res.status(400).json({ error: 'Email is already in use' }); 
+        } else {
+            res.status(500).json({ error: error.message }); 
+        }
     }
 });
-
 // Route handler for creating a new project
 apiRouter.post('/projects', async (req, res) => {
     try {
         const newProject = await createProject(req.body);
-        res.json(newProject);
+        res.status(201).json(newProject); 
     } catch (error) {
-        console.error('Error creating project:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message }); 
     }
 });
+
 
 // Route handler for creating a new project assignment
 apiRouter.post('/project_assignments', async (req, res) => {
@@ -52,8 +55,7 @@ apiRouter.post('/project_assignments', async (req, res) => {
         const newProjectAssignment = await createProjectAssignment(req.body);
         res.status(201).json(newProjectAssignment);
     } catch (error) {
-        console.error('Error creating project assignment:', error);
-        res.status(500).json({ error: 'Employee ID or Project code do not exists' });
+        res.status(500).json({ error: error.message }); 
     }
 });
 

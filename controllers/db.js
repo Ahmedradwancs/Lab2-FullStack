@@ -60,15 +60,15 @@ export const createEmployee = async (employeeData) => {
         if (existingEmployee) {
             throw new Error('Email is already in use');
         }
-        
-        // Create the new employee
         const newEmployee = await Employee.create(employeeData);
         return newEmployee;
     } catch (error) {
-        console.error("Error creating employee:", error);
-        throw error; // Rethrow the error for handling in the caller
+        throw new Error('Failed to add the new employee'); // Rethrow the error for handling in the caller
     }
 };
+
+
+
 
 // Controller function to create a project with validation
 export const createProject = async (projectData) => {
@@ -78,13 +78,10 @@ export const createProject = async (projectData) => {
         if (existingProject) {
             throw new Error('Project code is already in use');
         }
-        
-        // Create the new project
         const newProject = await Project.create(projectData);
         return newProject;
     } catch (error) {
-        console.error("Error creating project:", error);
-        throw error; // Rethrow the error for handling in the caller
+        throw new Error('Failed to add the new project'); // Rethrow the error for handling in the caller
     }
 };
 
@@ -96,19 +93,14 @@ export const createProjectAssignment = async (projectAssignmentData) => {
         if (!existingEmployee) {
             throw new Error('Employee ID does not exist');
         }
-        
-        // Check if the project code exists
         const existingProject = await Project.findOne({ project_code: projectAssignmentData.project_code });
         if (!existingProject) {
             throw new Error('Project code does not exist');
         }
-
-        // Create the project assignment
         const newProjectAssignment = await ProjectAssignment.create(projectAssignmentData);
         return newProjectAssignment;
     } catch (error) {
-        console.error("Error creating project assignment:", error);
-        throw error; // Rethrow the error for handling in the caller
+        throw new Error('Failed to add the project assignment'); // Rethrow the error for handling in the caller
     }
 };
 
