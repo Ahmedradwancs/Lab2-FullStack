@@ -1,21 +1,22 @@
-import { useState } from 'react'
-import './App.css'
-import Table from './components/Table'
-
+import React, { useState } from 'react';
+import './App.css';
+import Header from './components/Header';
+import Table from './components/Table';
 
 function App() {
-  const [showTable, setShowTable] = useState(false)
+  const [showTable, setShowTable] = useState(false);
 
   return (
     <div className="App">
-      <header className="App-header">
+      <Header />
+      <div className="App-content">
         <button onClick={() => setShowTable(!showTable)}>
           {showTable ? 'Hide Table' : 'Show Table'}
         </button>
         {showTable && <Table />}
-      </header>
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

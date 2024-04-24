@@ -3,23 +3,24 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    font-family: Arial, sans-serif;
 }
 
 thead th {
-    background-color: #f2f2f2;
+    background-color: #f7f7f7;
     color: #333;
     cursor: pointer;
-    padding: 10px;
+    padding: 12px;
     text-align: left;
     border-bottom: 2px solid #ddd;
 }
 
 thead th:hover {
-    background-color: #ddd;
+    background-color: #eee;
 }
 
 tbody td {
-    padding: 10px;
+    padding: 12px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -28,7 +29,7 @@ tbody tr:last-child td {
 }
 
 tbody tr:hover {
-    background-color: #f5f5f5;
+    background-color: #f2f2f2;
 }
 
 /* Responsive Table Styles */
@@ -42,7 +43,7 @@ tbody tr:hover {
         display: block;
         position: sticky;
         top: 0;
-        background-color: #f2f2f2;
+        background-color: #f7f7f7;
     }
 
     tbody {
@@ -52,8 +53,8 @@ tbody tr:hover {
     }
 
     tbody td, thead th {
-        min-width: 150px;
-        padding: 8px 16px;
+        min-width: 120px;
+        padding: 10px;
     }
 
     tbody tr {

@@ -72,7 +72,7 @@ const Table = () => {
 
 
     return (
-        <div>
+        <div className="table-container">
             <h2>Project Assignments</h2>
             <table>
                 <thead>
