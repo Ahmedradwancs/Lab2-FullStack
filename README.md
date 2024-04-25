@@ -1,4 +1,4 @@
-# Project Assignments Management System
+# Project Assignments
 
 This project is a part of the Fullstack course at Kristianstad University, developed for Lab 2. It is a web application designed to manage project assignments for employees.
 
