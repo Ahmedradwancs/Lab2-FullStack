@@ -1,8 +1,18 @@
-# React + Vite
+# Project Assignments Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a part of the Fullstack course at Kristianstad University, developed for Lab 2. It is a web application designed to manage project assignments for employees.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Displays a table of the latest 5 project assignments.
+- Allows sorting of project assignments by employee ID, employee name, project name, and start date.
+- Automatically fetches data from the backend server and updates the table every minute.
+
+## Technologies Used
+
+- **Frontend**: React.js
+- **Styling**: CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **API Requests**: Fetch API
+
