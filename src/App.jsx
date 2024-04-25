@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+            <Header />
       <div className="App-content">
         <button onClick={() => setShowTable(!showTable)}>
           {showTable ? 'Hide Table' : 'Show Table'}

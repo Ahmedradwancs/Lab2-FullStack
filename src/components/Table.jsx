@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Table.css';
+
+
 // Function to fetch data from the backend server
 const fetchData = async () => {
     try {
@@ -9,68 +11,56 @@ const fetchData = async () => {
         return jsonData;
     } catch (error) {
         console.error('Error fetching data:', error);
-        throw error;
+        throw error; 
     }
 };
 
+
 // Function to render the table
 const Table = () => {
-    const [data, setData] = useState([]);
-
+    const [data, setData] = useState([]); //data is our state and setData is a function to update the state
     // Function to fetch data and set state
     const getData = async () => {
         try {
             const fetchedData = await fetchData();
-            setData(fetchedData);
+            // Store only the latest 5 projects
+            const latestProjects = fetchedData.sort((a, b) => new Date(b.start_date) - new Date(a.start_date)).slice(0, 5);
+            setData(latestProjects);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
-
     useEffect(() => {
         getData(); 
-
         const intervalId = setInterval(() => {
             getData(); 
         }, 60000); 
-
         return () => clearInterval(intervalId);
     }, []); 
-
-    console.log('Data:', data);
-
-
-
-
     const sortByEmployeeID = () => {
         const sorted = [...data].sort((a, b) => {
             return a.employee[0]._id.localeCompare(b.employee[0]._id);
         });
         setData(sorted);
     };
-    
     const sortByEmployeeName = () => {
         const sorted = [...data].sort((a, b) => {
             return a.employee[0].full_name.localeCompare(b.employee[0].full_name);
         });
         setData(sorted);
     };
-
     const sortByProjectName = () => {
         const sorted = [...data].sort((a, b) => {
             return a.project[0].project_name.localeCompare(b.project[0].project_name);
         });
         setData(sorted);
     };
-
     const sortByDate = () => {
         const sorted = [...data].sort((a, b) => {
             return new Date(a.start_date) - new Date(b.start_date);
         });
         setData(sorted);
     };
-
-
     return (
         <div className="table-container">
             <h2>Project Assignments</h2>
